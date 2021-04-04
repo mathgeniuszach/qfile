@@ -1,4 +1,4 @@
-# shelf
+# qfile
 A python library for simplifying common file operations.
 
 Common file operations in python should be simpler and involve less boilerplate; this library was made to enable just that. Consider the following code:
@@ -29,24 +29,24 @@ finally:
     os.chdir(owd)
 ```
 
-With shelf, this code can become a lot simpler:
+With qfile, this code can become a lot simpler:
 ```python
-import shelf
+import qfile
 
 # Create a folder and enter it
-with shelf.wd("myFolder"):
+with qfile.wd("myFolder"):
     # Write some json to a file
-    shelf.write("data/myFile.json", {"a": 1, "b": 2}, "j")
+    qfile.write("data/myFile.json", {"a": 1, "b": 2}, "j")
     
     # Read some stuff
-    data = shelf.read("data/thing.txt") or "default"
+    data = qfile.read("data/thing.txt") or "default"
 ```
 
-shelf also has the safeguard option to "force" write to a file or folder, which will overwite anything in that location (normally trying to write like this raises an error):
+qfile also has the safeguard option to "force" write to a file or folder, which will overwite anything in that location (normally trying to write like this raises an error):
 ```
-shelf.default_force = True
-shelf.folder("myFolder.txt") # Makes a folder named "myFolder.txt"
-shelf.write("myFolder.txt", "text") # Overwrites the folder with a file
+qfile.default_force = True
+qfile.folder("myFolder.txt") # Makes a folder named "myFolder.txt"
+qfile.write("myFolder.txt", "text") # Overwrites the folder with a file
 ```
 
 ## API
