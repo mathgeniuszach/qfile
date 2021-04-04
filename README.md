@@ -53,14 +53,14 @@ fop.write("myFolder.txt", "text") # Overwrites the folder with a file
 Here's all the global data and functions available:
 
 
-#### default_force:bool
+### default_force:bool
 
 Determines the default force mode for the methods in this library (You can specify the "force" parameter on supported function calls to overwrite this setting).
 
 When a method's "force" mode is False, attempts to write/read to folders or make a folder where a file is already will raise an OSError of some kind. When "force" is True, these attempts will instead delete the folder/file and overwrite it with the proper file type. Note that sub-directories are automatically set to force mode.)
 
 
-#### failed(id: int = None) -> list
+### failed(id: int = None) -> list
 
 Gets the list of failed items from the last function call in this thread, whether or not they are a folder, and the reason they failed. It is safe to work on this returned list and do other function calls because every function call in this library generates a new list.
 
@@ -69,12 +69,12 @@ There are no guarantees that the first item in each tuple is definitely a string
 This method is thread safe and will only grab the latest failed information from the current thread. You can access other thread's failed lists by providing a "thread identifier" (returned by threading.get_ident(), for example).
 
 
-#### uuid() -> str
+### uuid() -> str
 
 Generates a unique version 4 uuid as a string.
 
 
-#### merge(src: Union[str, os.PathLike], dst: Union[str, os.PathLike], move=False, force=None) -> bool
+### merge(src: Union[str, os.PathLike], dst: Union[str, os.PathLike], move=False, force=None) -> bool
 
 Copies "src" into "dst". All existing sub-folders in "src" will be copied too, and all existing files in "dst" will be overwritten (except folders where files should be and vice-versa). Files and folders in "dst" that don't exist in "src" are untouched. Unlike other functions which make the parent folders themselves, "src" and "dst" need to exist for this method to work.
 
@@ -89,7 +89,7 @@ NOTE: normally you will want to use clone() or move() instead of this method as 
 Sets the "failed" list (accessible through failed()) to a list of failed folder/file names and their reason for failure.
 
 
-#### clone(src: Union[str, os.PathLike], dst: Union[str, os.PathLike], into: bool = False, force=None) -> str
+### clone(src: Union[str, os.PathLike], dst: Union[str, os.PathLike], into: bool = False, force=None) -> str
 
 Clones a file or folder to the destination "dst". Returns the path of the file or folder clone.
 
@@ -98,7 +98,7 @@ By default, "dst" is the path of the new file or folder, including the extension
 Sets the "failed" list (accessible through failed()) to a list of failed folder/file names and their reason for failure. If the root folder/file fails in some way (like if force is False and something goes wrong), an OSError will be raised instead.
 
 
-#### move(src: Union[str, os.PathLike], dst: Union[str, os.PathLike], into: bool = False, force=None) -> str
+### move(src: Union[str, os.PathLike], dst: Union[str, os.PathLike], into: bool = False, force=None) -> str
 
 Moves a file or folder to the destination "dst". Returns the new path of the moved file or folder.
 
@@ -109,32 +109,32 @@ By default, "dst" is the path of the new file or folder, including the extension
 Sets the "failed" list (accessible through failed()) to a list of failed folder/file names and their reason for failure. If the root folder/file fails in some way (like if force is False and something goes wrong), an OSError will be raised instead.
 
 
-#### cut(*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]])
+### cut(*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]])
 
 Marks a set of files and folders to be moved by paste(). Clears any marked files/folders.
 
 
-#### copy(*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]])
+### copy(*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]])
 
 Marks a set of files and folders to be copied by paste(). Clears any marked files/folders.
 
 
-#### a_cut(*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]])
+### a_cut(*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]])
 
 Works like cut() but doesn't unmark any already marked files/folders.
 
 
-#### a_copy(*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]])
+### a_copy(*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]])
 
 Works like copy() but doesn't unmark any already marked files/folders.
 
 
-#### unmark()
+### unmark()
 
 Unmarks all marked files and folders.
 
 
-#### paste(dst: Union[str, os.PathLike], root: Union[str, os.PathLike] = None, force=None) -> bool
+### paste(dst: Union[str, os.PathLike], root: Union[str, os.PathLike] = None, force=None) -> bool
 
 Pastes (moves or copies) a set of files and folders into the folder "dst". All marked items will become unmarked. Non-existant marked items will be ignored. Returns True on complete success, and False on failure.
 
@@ -145,7 +145,7 @@ By default, the copied folders and files do not keep their parent folder structu
 The "failed" list (accessed through failed()) is set to a list of files and folders that failed.
 
 
-#### scan(src: Union[str, os.PathLike], filter: Callable = None, recurse: bool = True) -> tuple
+### scan(src: Union[str, os.PathLike], filter: Callable = None, recurse: bool = True) -> tuple
 
 Scans the folder "src" and returns a tuple of: a list of the absolute paths of all subfolders, and a list of the absolute paths of all files/subfiles. The root folder is not included in the returned folder list.
 
@@ -156,14 +156,14 @@ Consider using glob() if you want something simpler that yields values instead o
 By default, this will scan all subfolders too. Set "recurse" to False to disable this behavior.
 
 
-#### glob(root: Union[str, os.PathLike] = '.', ptrn: Union[str, os.PathLike] = '**/*', dirs=True, files=True) -> Iterator[pathlib.Path]
+### glob(root: Union[str, os.PathLike] = '.', ptrn: Union[str, os.PathLike] = '**/*', dirs=True, files=True) -> Iterator[pathlib.Path]
 
 A wrapper for Path(root).glob(str(ptrn)). Globs over all the folders and files in root.
 
 This method can automatically check the type of returned paths and filter out directories (folders) or files. Set dirs to False to filter out directories from the returned list, or set dirs to False to filter out files from the returned list. If you set both to False an error will be raised.
 
 
-#### delete(*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]]) -> bool
+### delete(*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]]) -> bool
 
 Deletes the file(s) or folder(s) at "src". Deletes all sub-folders and files. Returns True if completely successful, and False otherwise.
 
@@ -172,12 +172,12 @@ If a single string is given, returns True if the "src" was deleted or False if "
 The "failed" list (accessible through failed()) is always set to a list of files and folders that failed, so this function will never raise an OSError.
 
 
-#### wd(wd, force=None, temp=False)
+### wd(wd, force=None, temp=False)
 
 A context manager for temporarily entering a working directory with a with statement. Just use "with wd('working_directory'):". If the working directory does not exist, it will be created automatically. If "temp" is True, the working directory will also be deleted when exiting the "with" block. Failing to delete the temporary directory will not result in an error.
 
 
-#### folder(src: Union[str, os.PathLike], cwd: bool = False, force=None) -> bool
+### folder(src: Union[str, os.PathLike], cwd: bool = False, force=None) -> bool
 
 Creates a folder at "src". Parent folders will be created if they do not exist.
 
@@ -186,14 +186,14 @@ Setting "cwd" to True will result in changing the working directory to the given
 Returns True if "src" was newly created or False if "src" already exists.
 
 
-#### touch(src: Union[str, os.PathLike], clear: bool = False, force=None) -> bool
+### touch(src: Union[str, os.PathLike], clear: bool = False, force=None) -> bool
 
 Creates a file at "src". Parent folders will be created if they do not exist.
 
 Returns True if "src" was newly created or False if "src" already exists. If "clear" is True and the file already exists, it will be emptied.
 
 
-#### write(src: Union[str, os.PathLike], data='', mode: str = 'n', sep: str = ',', eol: str = '\n', code: str = 'utf-8', key: Callable = None, force=None)
+### write(src: Union[str, os.PathLike], data='', mode: str = 'n', sep: str = ',', eol: str = '\n', code: str = 'utf-8', key: Callable = None, force=None)
 
 Writes the content "data" to the file "src" with the given "mode", overwriting the entire file's contents.
 
@@ -211,7 +211,7 @@ If "mode" is 'p', "data" is a python object that will be pickled (serialized) an
 "key", if provided, is a callable that takes binary data as an argument and converts it to output binary data to write to the file. You can use this to encrypt data before it gets sent to a file. The binary data sent into the function is either a string that would have been written to the file encoded with "code", or raw binary data.
 
 
-#### read(src: Union[str, os.PathLike], mode: str = 'n', sep: str = ',', code: str = 'utf-8', err: bool = False, key: Callable = None) -> Any
+### read(src: Union[str, os.PathLike], mode: str = 'n', sep: str = ',', code: str = 'utf-8', err: bool = False, key: Callable = None) -> Any
 
 Reads the content from the file "src" with the given "mode".
 
@@ -234,7 +234,7 @@ If "mode" is 'p', this method will unpickle the content in the file (assumed to 
 "key", if provided, is a callable that takes binary data as an argument and converts it to output data to interpret in this function. You can use this to decrypt file data before it gets interpreted and returned. The binary data sent into the function is the raw binary data in the given file.
 
 
-#### replace(src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]], old: Union[str, bytes, re.Pattern], new: Union[str, bytes], code: str = 'utf-8') -> bool
+### replace(src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]], old: Union[str, bytes, re.Pattern], new: Union[str, bytes], code: str = 'utf-8') -> bool
 
 Replaces all instances of "old" with "new" in the "src" file(s).
 
@@ -247,7 +247,7 @@ If it is a regex object, it will search for that regex in files (in text mode) a
 If multiple files are provided in "src", the "failed" list (accessible through failed()) is set to a list of files that could not have their contents replaced.
 
 
-#### rename(src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]], name: str, regex: Union[str, re.Pattern] = None) -> Union[str, list[str]]
+### rename(src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]], name: str, regex: Union[str, re.Pattern] = None) -> Union[str, list[str]]
 
 Gives the "src" file/folder(s) the new "name" (including the extension if it is a file). Note that renaming something to a file or folder that already exists will cause an error. Returns a string or list of strings to the paths of the new file names.
 
@@ -258,45 +258,45 @@ If "regex" is given, it specifies a regex that must matched with in the file nam
 If multiple files are provided in "src", the "failed" list (accessible through failed()) is set to a list of files and folders that failed to be renamed.
 
 
-#### exists(path)
+### exists(path)
 
 Test whether a path exists.  Returns False for broken symbolic links
 
 
-#### isdir(s)
+### isdir(s)
 
 Return true if the pathname refers to an existing directory.
 
 
-#### isfile(path)
+### isfile(path)
 
 Test whether a path is a regular file
 
 
-#### islink(path)
+### islink(path)
 
 Test whether a path is a symbolic link.
 This will always return false for Windows prior to 6.0.
 
 
-#### parent(child: Union[str, os.PathLike]) -> pathlib.Path
+### parent(child: Union[str, os.PathLike]) -> pathlib.Path
 
 Returns the parent of this child element.
 
 
-#### rel(child: Union[str, os.PathLike], parent: Union[str, os.PathLike]) -> Optional[pathlib.Path]
+### rel(child: Union[str, os.PathLike], parent: Union[str, os.PathLike]) -> Optional[pathlib.Path]
 
 Returns the relative path of child in parent as given by Path.relative_to(), or None if "child" is not a child of "parent". Relative paths will be turned into absolute paths.
 
 For example, If child is "myfolder/thing/that" and parent is "myfolder", this will return Path("thing/that").
 
 
-#### ftype(src: Union[str, os.PathLike]) -> tuple
+### ftype(src: Union[str, os.PathLike]) -> tuple
 
 Returns a string representing the type of the file/folder at "src" and whether or not "src" is a link. The string is either 'file' or 'dir', or None if it does not exist.
 
 
-#### archive(src: Union[str, os.PathLike], dst: Union[str, os.PathLike] = '.', format: str = 'zip', into: bool = True, temp=False, force=None) -> str
+### archive(src: Union[str, os.PathLike], dst: Union[str, os.PathLike] = '.', format: str = 'zip', into: bool = True, temp=False, force=None) -> str
 
 Archives all of the content in folder "src" into an archive and then moves the archive into "dst". Returns the path of the created archive. Note that empty folders will not be included in the archive.
 
@@ -309,7 +309,7 @@ If "temp" is True, this method will also delete the "src" folder.
 Default supported types are those supported by shutil.make_archive() (so custom formats registered through shutil.register_archive_format() work too). Note that the type does not have to match the file extension of "dst" if into is False.
 
 
-#### extract(src: Union[str, os.PathLike], dst: Union[str, os.PathLike] = '.', temp=False, force=None) -> bool
+### extract(src: Union[str, os.PathLike], dst: Union[str, os.PathLike] = '.', temp=False, force=None) -> bool
 
 Extracts the content in the archive "src" and merges it with "dst". Merges folders and overwrites files that are already in "dst". The type of the archive is assumed. The "dst" folder will be created if it does not exist. See archive() for extra added filetypes. Returns True on complete success, False on failure.
 
