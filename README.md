@@ -1,4 +1,4 @@
-# fop
+# shelf
 A python library for simplifying common file operations.
 
 Common file operations in python should be simpler and involve less boilerplate; this library was made to enable just that. Consider the following code:
@@ -29,24 +29,24 @@ finally:
     os.chdir(owd)
 ```
 
-With fop, this code can become a lot simpler:
+With shelf, this code can become a lot simpler:
 ```python
-import fop
+import shelf
 
 # Create a folder and enter it
-with fop.wd("myFolder"):
+with shelf.wd("myFolder"):
     # Write some json to a file
-    fop.write("data/myFile.json", {"a": 1, "b": 2}, "j")
+    shelf.write("data/myFile.json", {"a": 1, "b": 2}, "j")
     
     # Read some stuff
-    data = fop.read("data/thing.txt") or "default"
+    data = shelf.read("data/thing.txt") or "default"
 ```
 
-fop also has the safeguard option to "force" write to a file or folder, which will overwite anything in that location (normally trying to write like this raises an error):
+shelf also has the safeguard option to "force" write to a file or folder, which will overwite anything in that location (normally trying to write like this raises an error):
 ```
-fop.default_force = True
-fop.folder("myFolder.txt") # Makes a folder named "myFolder.txt"
-fop.write("myFolder.txt", "text") # Overwrites the folder with a file
+shelf.default_force = True
+shelf.folder("myFolder.txt") # Makes a folder named "myFolder.txt"
+shelf.write("myFolder.txt", "text") # Overwrites the folder with a file
 ```
 
 ## API
