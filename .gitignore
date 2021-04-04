@@ -1,6 +1,7 @@
 **/__pycache__
 build
 build.*
+setup.py
 upload.bat
 dist
 *.egg-info

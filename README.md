@@ -1,6 +1,8 @@
 # qfile
 A python library for simplifying common file operations.
 
+`pip install qfile`
+
 Common file operations in python should be simpler and involve less boilerplate; this library was made to enable just that. Consider the following code:
 ```python
 import os, shutil, json

@@ -260,7 +260,7 @@ def _test():
         # Print success message
         print("Tests succeeded")
     
-    input("Press enter to exit...")
+    # input("Press enter to exit...")
     delete(name)
 
 
