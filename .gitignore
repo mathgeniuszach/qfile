@@ -1,0 +1,6 @@
+**/__pycache__
+build
+build.*
+upload.bat
+dist
+*.egg-info
