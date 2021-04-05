@@ -64,19 +64,16 @@ def touch(src: PathLike, clear: bool = False, force=None) -> bool:
 #     os.symlink(dst, src)
 #     return True
 
-
 def write(src: PathLike, data='', mode: str = 'n', sep: str = ',', eol: str = "\n", code: str = "utf-8", key: Callable = None, force=None) -> int:
     """Writes the content (not necessarily a string) "data" to the file "src" with the given "mode", overwriting the entire file's contents. Returns the number of bytes written to the file.
 
-    If "mode" is 'n', "data" can be either a string, a bytes object, or an iterable of strings (interpreted as a list of lines) to write to a file. If given a non-string object, str() is called on that object and that is written instead.
-
-    If "mode" is 't', "data" is an iterable of an iterable of strings ([["a", "b"], ["c", "d"]]); the inner iterables are joined by "sep" and the outer iterable is then joined by "eol". By default you can use this to create a csv file. A basic attempt will be made to sanatize strings in "data" of the "sep" string.
-
-    If "mode" is 'j', "data" is a dictionary that will be written to the file in JSON format.
-
-    If "mode" is 'p', "data" is a python object that will be pickled (serialized) and afterwards written to the file.
+    - If "mode" is 'n', "data" can be either a string, a bytes object, or an iterable of strings (interpreted as a list of lines) to write to a file. If given a non-string object, str() is called on that object and that is written instead.
+    - If "mode" is 't', "data" is an iterable of an iterable of strings ([["a", "b"], ["c", "d"]]); the inner iterables are joined by "sep" and the outer iterable is then joined by "eol". By default you can use this to create a csv file. A basic attempt will be made to sanatize strings in "data" of the "sep" string.
+    - If "mode" is 'j', "data" is a dictionary that will be written to the file in JSON format.
+    - If "mode" is 'p', "data" is a python object that will be pickled (serialized) and afterwards written to the file.
 
     "eol" is the end of line character used to join lines together.
+
     "code" is the encoding to write to the file with; it defaults to "utf-8" when the text is not a bytestring but can be set to "ascii".
 
     "key", if provided, is a callable that takes binary data as an argument and converts it to output binary data to write to the file. You can use this to encrypt data before it gets sent to a file. The binary data sent into the function is either a string that would have been written to the file encoded with "code", or raw binary data.
@@ -190,17 +187,12 @@ def read(src: PathLike, mode: str = 'n', sep: str = ',', code: str = "utf-8", er
     
     If "err" is set to anything else besides True or False, this function will attempt to write back to the "src" (using the write function) with "err" as the data to write in the given "mode" ('n', 'b', and 'l' all use 'n' write mode), returning the value of "err" or raising any errors along the way. Writing back to the file uses the "force" argument and the key "errkey". In modes 'j' and 'p', if any parsing errors occur and "err" is not True or False, this function will also make an attempt to overwrite "src".
 
-    If "mode" is 'n', this function will return a string with all the text in the file.
-
-    If "mode" is 'b', this function will return a bytes object of the content in the file, or whatever "key" returns based upon the bytes in that file.
-
-    If "mode" is 'l', this function will return a list of strings, with each string being one line in the file. It handles all three line endings ('\\r\\n', '\\r', and '\\n').
-
-    If "mode" is 't', this function will return a list of lists of strings. Each line in the file is read into a larger list as a string, and split by "sep". By default you can use this to read csv files. It handles all three line endings ('\\r\\n', '\\r', and '\\n')
-
-    If "mode" is 'j', this function will parse the content in the file as JSON and return a dictionary object with the file data.
-
-    If "mode" is 'p', this function will unpickle the content in the file (assumed to be a pickled python object) and return that object. BE VERY CAREFUL reading pickled files from untrusted sources, as it could lead to ACE (arbitrary code execution). JSON is a safer format that does not lead to ACE.
+    - If "mode" is 'n', this function will return a string with all the text in the file.
+    - If "mode" is 'b', this function will return a bytes object of the content in the file, or whatever "key" returns based upon the bytes in that file.
+    - If "mode" is 'l', this function will return a list of strings, with each string being one line in the file. It handles all three line endings ('\\r\\n', '\\r', and '\\n').
+    - If "mode" is 't', this function will return a list of lists of strings. Each line in the file is read into a larger list as a string, and split by "sep". By default you can use this to read csv files. It handles all three line endings ('\\r\\n', '\\r', and '\\n')
+    - If "mode" is 'j', this function will parse the content in the file as JSON and return a dictionary object with the file data.
+    - If "mode" is 'p', this function will unpickle the content in the file (assumed to be a pickled python object) and return that object. BE VERY CAREFUL reading pickled files from untrusted sources, as it could lead to ACE (arbitrary code execution). JSON is a safer format that does not lead to ACE.
 
     "code" is the encoding to read from the file with; it defaults to "utf-8" when reading normal text (this is ignored in 'b' and 'p' mode) but it can be set to "ascii".
 
