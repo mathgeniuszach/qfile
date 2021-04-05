@@ -1,7 +1,7 @@
 """A python library for simplifying common file operations."""
 
 __maintainer__  = "Zach K"
-__version__     = "1.0.0"
+__version__     = "1.0.1"
 __all__         = [
                     "default_force","failed","uuid","merge","clone","move","cut","copy","a_cut","a_copy",
                     "unmark", "paste","scan","glob","delete","wd","folder","touch","write","read",
@@ -862,10 +862,10 @@ def write(src:PathLike, data='', mode:str='n', sep:str=',', eol:str="\n", code:s
         elif raw:
             src_path.write_bytes(raw)
 
-def read(src:PathLike, mode:str='n', sep:str=',', code:str="utf-8", err:bool=False, key:Callable=None) -> Any:
+def read(src:PathLike, mode:str='n', sep:str=',', code:str="utf-8", err:bool=True, key:Callable=None) -> Any:
     """Reads the content from the file "src" with the given "mode".
 
-    By default, this method will not raise a FileNotFoundError or an error if "src" is a directory, but will instead return None. Set "err" to True to raise FileNotFoundError instead.
+    By default, this method will raise a FileNotFoundError or an error if "src" is a directory. Set "err" to False to return None instead.
 
     If "mode" is 'n', this method will return a string with all the text in the file.
 

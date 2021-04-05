@@ -213,11 +213,11 @@ If "mode" is 'p', "data" is a python object that will be pickled (serialized) an
 "key", if provided, is a callable that takes binary data as an argument and converts it to output binary data to write to the file. You can use this to encrypt data before it gets sent to a file. The binary data sent into the function is either a string that would have been written to the file encoded with "code", or raw binary data.
 
 
-### read(src: Union[str, os.PathLike], mode: str = 'n', sep: str = ',', code: str = 'utf-8', err: bool = False, key: Callable = None) -> Any
+### read(src: Union[str, os.PathLike], mode: str = 'n', sep: str = ',', code: str = 'utf-8', err: bool = True, key: Callable = None) -> Any
 
 Reads the content from the file "src" with the given "mode".
 
-By default, this method will not raise a FileNotFoundError or an error if "src" is a directory, but will instead return None. Set "err" to True to raise FileNotFoundError instead.
+By default, this method will raise a FileNotFoundError or an error if "src" is a directory. Set "err" to False to return None instead.
 
 If "mode" is 'n', this method will return a string with all the text in the file.
 
