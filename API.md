@@ -1,14 +1,14 @@
 # API
 This is the entire api for qfile.
 
-[Renamed Standard Functions](#renamed-standard-functions)
-[Generic Operations](#generic-operations)
-[Folder Operations](#folder-operations)
-[File Operations](#file-operations)
-[Relocating Operations](#relocating-operations)
-[Replace Operations](#replace-operations)
-[Clipboard-Like Operations](#clipboard-like-operations)
-[Archiving Operations](#archiving-operations)
+- [Renamed Standard Functions](#renamed-standard-functions)
+- [Generic Operations](#generic-operations)
+- [Folder Operations](#folder-operations)
+- [File Operations](#file-operations)
+- [Relocating Operations](#relocating-operations)
+- [Replace Operations](#replace-operations)
+- [Clipboard-Like Operations](#clipboard-like-operations)
+- [Archiving Operations](#archiving-operations)
 
 ## Renamed Standard Functions
 These are simply renamed versions of standard functions for easy access:
