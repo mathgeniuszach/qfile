@@ -78,7 +78,7 @@ qfile, at least in my opinion, makes this process much simpler and more readable
 ```python
 import qfile
 
-path = input("Enter a directory")
+path = input("Enter a directory: ")
 # Make the directory
 with qfile.wd(path):
     # Write dictionary to file
