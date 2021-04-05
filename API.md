@@ -1,5 +1,5 @@
 # API
-This is the entire api for qfile.
+This is the entire api for qfile. It matches with version 1.1.0.
 
 - [Renamed Standard Functions](#renamed-standard-functions)
 - [Generic Operations](#generic-operations)
