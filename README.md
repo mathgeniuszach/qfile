@@ -56,10 +56,10 @@ import shutil
 path = Path(input("Enter a directory: "))
 path.mkdir(parents=True, exist_ok=True)
 # Write dictionary to file
-path.join("data.json").write_text(json.dumps({"a": 1, "b": 2}))
+path.joinpath("data.json").write_text(json.dumps({"a": 1, "b": 2}))
 
 # Read from file
-file = path.join("text")
+file = path.joinpath("text")
 try:
     text = file.read_text("utf-8")
 except FileNotFoundError:
@@ -67,7 +67,7 @@ except FileNotFoundError:
     file.write_text(text, "utf-8")
 
 # Delete "deleteme"
-badfile = path.join("deleteme")
+badfile = path.joinpath("deleteme")
 if badfile.is_dir():
     shutil.rmtree(badfile)
 elif badfile.is_file():
