@@ -46,7 +46,7 @@ Determines the maximum file size in bytes the read() function can handle. Attemp
 Returns the parent of this child element.
 
 ### delete
-**delete(*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]]) -> bool**
+**delete(\*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]]) -> bool**
 
 Deletes the file(s) or folder(s) at "src". Deletes all sub-folders and files. Returns True if completely successful, and False otherwise.
 
@@ -101,7 +101,7 @@ Consider using glob() if you want something simpler that yields values instead o
 By default, this will scan all subfolders too. Set "recurse" to False to disable this behavior.
 
 ### glob
-**glob(root: Union[str, os.PathLike] = '.', ptrn: Union[str, os.PathLike] = '**/*', dirs=True, files=True) -> Iterator[pathlib.Path]**
+**glob(root: Union[str, os.PathLike] = '.', ptrn: Union[str, os.PathLike] = '\*\*/\*', dirs=True, files=True) -> Iterator[pathlib.Path]**
 
 A wrapper for Path(root).glob(str(ptrn)). Globs over all the folders and files in root.
 
@@ -265,22 +265,22 @@ If multiple files are provided in "src", the "failed" list (accessible through f
 ## Clipboard-Like Operations
 
 ### cut
-**cut(*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]])**
+**cut(\*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]])**
 
 Marks a set of files and folders to be moved by paste(). Clears any marked files/folders.
 
 ### copy
-**copy(*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]])**
+**copy(\*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]])**
 
 Marks a set of files and folders to be copied by paste(). Clears any marked files/folders.
 
 ### a_cut
-**a_cut(*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]])**
+**a_cut(\*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]])**
 
 Works like cut() but doesn't unmark any already marked files/folders.
 
 ### a_copy
-**a_copy(*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]])**
+**a_copy(\*src: Union[str, os.PathLike, Iterable[Union[str, os.PathLike]]])**
 
 Works like copy() but doesn't unmark any already marked files/folders.
 
