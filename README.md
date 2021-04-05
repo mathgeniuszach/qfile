@@ -36,7 +36,7 @@ qfile.delete("deleteme")
 qfile.replace(qfile.glob(".", "**/*.txt"), "old", "new")
 ```
 
-qfile can do a whole lot more, just check out the [API documentation]()
+qfile can do a whole lot more, just check out the [API documentation](API.md)
 
 ## Deeper Example
 
