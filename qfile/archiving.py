@@ -1,10 +1,10 @@
 """Sub-module for archiving functions."""
 
 from . import PathLike, isdir, isfile, uuid, check_force
-from .dirs import wd
 from .relocate import move
 
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 import shutil
 import os
@@ -31,17 +31,15 @@ def archive(src: PathLike, dst: PathLike = '.', format: str = 'zip', into: bool 
             FileExistsError("cannot create an archive where a folder exists!")
 
     src_path = Path(src).absolute()
-    with wd(src_path.parent):
-        # Generate unique temporary folder name
-        name = uuid()
-        # Create the archive
-        file = shutil.make_archive(os.path.join(
-            name, src_path.stem), format, src_path.name)
-    # Move to proper location
-    out = move(file, dst, into=into, force=True)
-    # Delete empty directory
-    # If it's not empty, we have bigger problems to worry about
-    os.rmdir(name)
+    tdir = TemporaryDirectory()
+    try:
+        file = shutil.make_archive(
+            os.path.join(tdir.name, src_path.stem), format, src_path
+        )
+        # Move to proper location
+        out = move(file, dst, into=into, force=True)
+    finally:
+        tdir.cleanup()
 
     # Delete src folder if move is true
     if temp:
@@ -67,21 +65,17 @@ def extract(src: PathLike, dst: PathLike = '.', temp=False, force=None) -> bool:
         FileExistsError("cannot extract an archive to a file")
 
     # Generate unique temporary folder name
-    name = uuid()
-    os.mkdir(name)
+    tdir = TemporaryDirectory()
     try:
         # Unpack archive into temporary folder
-        shutil.unpack_archive(src, name)
+        shutil.unpack_archive(src, tdir.name)
         # Merge into dst
-        success = move(name, dst, force=force)
-
+        success = move(tdir.name, dst, force=force)
+        # Delete src folder if tmp
         if temp:
             os.remove(src)
-    except OSError as e:
-        # Panic delete the temp folder
-        shutil.rmtree(name)
-        # Reraise exception
-        raise e.with_traceback(sys.exc_info()[2])
+    finally:
+        tdir.cleanup()
 
     return success
 

@@ -3,6 +3,7 @@
 from . import PathLike, isdir, check_force
 
 from pathlib import Path
+from tempfile import TemporaryDirectory
 from typing import Callable, Iterator
 from contextlib import contextmanager
 
@@ -128,6 +129,23 @@ def wd(wd, force=None, temp=False):
                 shutil.rmtree(wd)
             except OSError:
                 pass
+
+
+@contextmanager
+def twd(after: Callable = None):
+    """A context manager for creating a temporary directory and temporarily changing the working directory to it.
+
+    The difference between this and something like 'wd(uuid(), temp=True)' is that the temporary directory is made by python's built in "tempfile" library instead of this library.
+
+    "final" is an optional callable that will be called (with the folder name as the first argument) after the with statement completes (and the original working directory is restored), but before the temporary directory is deleted. You can use this to clean up the folder before it gets removed.
+    """
+    with TemporaryDirectory() as fname:
+        owd = os.getcwd()
+        os.chdir(fname)
+        try:
+            yield fname
+        finally:
+            os.chdir(owd)
 
 
 # TODO: support virtual folders so people can't complain about my naming convention (An in-memory file tree will do fine later on)
