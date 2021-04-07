@@ -1,6 +1,6 @@
 """Sub-module for archiving functions."""
 
-from . import PathLike, isdir, isfile, uuid, check_force
+from . import PathLike, isdir, isfile, check_force
 from .relocate import move
 
 from pathlib import Path
@@ -8,7 +8,6 @@ from tempfile import TemporaryDirectory
 
 import shutil
 import os
-import sys
 
 
 def archive(src: PathLike, dst: PathLike = '.', format: str = 'zip', into: bool = True, temp=False, force=None) -> str:
