@@ -90,3 +90,7 @@ with qfile.wd(path):
     # Delete "deleteme"
     qfile.delete("deleteme")
 ```
+
+## Contact
+
+Contact me on [Discord](https://discord.gg/pBFqEcXvW5) and support me on [Ko-Fi](https://ko-fi.com/mathgeniuszach)!
